@@ -1,0 +1,23 @@
+%ul.quick-nav
+  - if user_signed_in?
+    - if content_for(:quick_nav)
+      = content_for(:quick_nav)
+    - else
+      %li
+        = link_to users_path do
+          %span.text-white.font-heading Users
+      %li
+        = link_to profile_users_path do
+          %span.text-white.font-heading My Profile
+    %li
+      = link_to destroy_user_session_path, method: :delete do
+        %span.text-white.font-heading Logout
+  - else
+    - if controller_name != 'sessions'
+      %li
+        = link_to new_user_session_path do
+          %span.text-white.font-heading Login
+    - if controller_name != 'registrations'
+      %li
+        = link_to new_user_registration_path do
+          %span.text-white.font-heading Sign Up

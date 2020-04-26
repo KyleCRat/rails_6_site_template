@@ -1,0 +1,89 @@
+// Import any fonts
+//   example google font import:
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700|Roboto&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Audiowide|Barlow:100,200,300,400,400i,500,600,700,800,900|Gelasio:400,500,600,700|Iceland|Oswald:200,300,400,500,600,700|Philosopher:400,700|Play:400,700|Rajdhani:300,400,500,600,700|Rationale|Righteous|Roboto:100,300,400,500,700,900|Sarpanch:400,500,600,700,800,900|Share+Tech+Mono|Sulphur+Point:300,400,700|Tenor+Sans&display=swap');
+
+//   example font within / assets/fonts
+//@font-face {
+//    font-family: 'example-second-font';
+//    src: font-url('branding/font-within-assets-fonts.woff2') format('woff2'),
+//         font-url('branding/font-within-assets-fonts.woff') format('woff');
+//    font-weight: normal;
+//    font-style: normal;
+//}
+
+////////////////////////////////////////////////////////////////////////////////
+// Font Variables
+////////////////////////////////////////////////////////////////////////////////
+// Professional
+// $rajdhani: 'Rajdhani', sans-serif;
+// $sulphur: 'Sulphur Point', sans-serif;
+
+//Gamey
+// $sarpanch: 'Sarpanch', sans-serif;
+// $share: 'Share Tech Mono', monospace;
+
+$monoserrat: 'Montserrat', sans-serif;
+$roboto: 'Roboto', sans-serif;
+
+$heading: $monoserrat;
+$body: $roboto;
+
+////////////////////////////////////////////////////////////////////////////////
+// Font Family
+////////////////////////////////////////////////////////////////////////////////
+.font-heading { font-family: $heading; }
+.font-body { font-family: $body; }
+//.font-example-font { font-family: $example-font; }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Heading Styles
+////////////////////////////////////////////////////////////////////////////////
+
+html { font-size: 1.1em; }
+
+body {
+  font-family: $body;
+  font-weight: 400;
+  line-height: 1.45;
+  color: $font;
+}
+
+p {
+  margin-bottom: 1.3em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 16px;
+  overflow: hidden;
+  font-family: $heading;
+  font-weight: inherit;
+  text-overflow: ellipsis;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.157em;
+}
+
+.subtitle {
+  font-family: $heading;
+  font-size: 1.333em;
+  font-weight: 400;
+  line-height: 1.2;
+  color: lighten($font, 40%);
+}
+
+h2 { font-size: 2.369em; }
+
+h3 { font-size: 1.777em; }
+
+h4 { font-size: 1.333em; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Other Global Typography Styles
+////////////////////////////////////////////////////////////////////////////////

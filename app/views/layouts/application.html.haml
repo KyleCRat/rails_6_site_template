@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'httpequiv': 'Content-Type'}/
+
+    = render 'layouts/favicon'
+
+    %meta{content: '', property: 'fb:app_id'}/
+    %meta{content: '', property: 'og:url'}/
+    %meta{content: 'website', property: 'og:type'}/
+    %meta{content: '', property: 'og:title'}/
+    %meta{content: '', property: 'og:description'}/
+    %meta{content: '', property: 'og:image'}/
+    %meta{content: '', property: 'og:markup_url'}/
+
+    %meta{content: '', name: 'twitter:card'}/
+    %meta{content: '', name: 'twitter:site'}/
+    %meta{content: '', name: 'twitter:title'}/
+    %meta{content: '', name: 'twitter:description'}/
+    %meta{content: '', name: 'twitter:url'}/
+    %meta{content: '', name: 'twitter:image'}/
+    %meta{content: '', name: 'twitter:image:alt'}/
+
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
+
+    %title= content_for :title
+    %meta{ name: 'description', content: meta_description }/
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = render 'layouts/nav'
+    .body-wrapper
+      = render 'layouts/header'
+      = render 'layouts/secondary_header'
+      = render 'components/flash_wrapper'
+      #content.relative.grid-container
+        = yield
+        = render 'components/debugger'
+      = render 'layouts/footer'

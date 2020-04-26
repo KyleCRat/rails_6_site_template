@@ -1,0 +1,17 @@
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+a,
+button {
+  transition: background .33s;
+
+  &:hover {
+    transition: background .33s;
+  }
+}

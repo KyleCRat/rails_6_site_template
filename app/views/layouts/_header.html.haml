@@ -1,0 +1,20 @@
+%header.bg-primary.border.border-teal-400.flex-no-wrap{data: { controller: 'nav header', action: 'turbolinks:load@window->nav#close' } }
+  .nav-overlay.z-40{ data: { action: 'click->nav#toggle' } }
+  %button.link.h-full.px-4.flex.items-center.border-r.text-teal-200.border-teal-400.hover:text-white.hover:border-white{ data: { action: 'click->nav#toggle' } }
+    %svg.fill-current.h-4.w-4{:viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
+      %title Menu
+      %path{:d => "M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"}
+    %span.ml-2.font-heading Menu
+
+  .block.px-4.flex-grow.flex.items-center.justify-center.max-w-full{data: { action: 'raf:scrolling@window->header#animate' } }
+    = link_to root_path, class: 'truncate whitespace-no-wrap max-w-full'do
+      .title.flex.items-center.flex-shrink-0.text-white.truncate
+        -# %span.text-xl.uppercase.font-heading G
+        %span.text-xl.uppercase.font-heading.overflow-hidden{ data: { target: 'header.hideable' } }Rails&nbsp;
+        %span.text-xl.uppercase.font-heading.overflow-hidden{ data: { target: 'header.hideable' } }6&nbsp;
+        %span.text-xl.uppercase.font-heading.overflow-hidden.truncate.w-0.whitespace-no-wrap{ data: { target: 'header.showable' } }= content_for :interior_title
+        -# %span.text-xl.uppercase.font-heading G
+        %span.text-xl.uppercase.font-heading.overflow-hidden{ data: { target: 'header.hideable' } }Template
+
+  = link_to pages_path(:other), class: 'link h-full px-4 items-center border-l text-teal-200 border-teal-400 hover:text-white hover:border-white hidden md:flex' do
+    %span.text-xl.font-heading Other Page

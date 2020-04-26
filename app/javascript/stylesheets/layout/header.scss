@@ -1,0 +1,26 @@
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: $header-height;
+  min-height: $header-height;
+
+  .link {
+    transition: background .33s;
+
+    &:hover {
+      background: darken($primary, 10%);
+      transition: background .33s;
+    }
+  }
+}
+
+.body-wrapper {
+  padding-top: $header-height;
+}

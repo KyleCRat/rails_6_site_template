@@ -1,0 +1,33 @@
+- title @user.username
+- content_for :quick_nav do
+  - if @user == current_user
+    %li
+      = link_to edit_user_registration_path do
+        %span Edit Account
+  - elsif policy(@user).edit?
+    %li
+      = link_to edit_user_path(@user) do
+        %span Edit User
+    %li
+      = link_to reset_password_user_path(@user), method: :post do
+        %span Send Password Reset
+
+
+.grid-x
+  .cell.large-4
+    - if @user.avatar.attached?
+      = image_tag @user.avatar.variant(resize: '300x300!')
+  .cell.large-8
+    %p
+      %b Username:
+      = @user.username
+
+    - if @user == current_user
+      %h3 Private
+
+      %p
+        %b Full Name:
+        = @user.full_name
+      %p
+        %b Email:
+        = @user.email

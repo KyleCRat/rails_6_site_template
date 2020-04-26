@@ -1,0 +1,27 @@
+<%= content_tag(:section, id: "debug", class: "row", data: { controller: 'debugger', target: 'debugger.panel' } ) do %>
+  <%= content_tag(:div, id: "debug-screen-width-wrapper") do %>
+    <%= content_tag(:button, "&times;".html_safe, type: 'button', name: 'debug-button', data: { action: 'click->debugger#close' } ) %>
+    <div>Screen Width: <span data-target="debugger.width">Loading Width...</span></div>
+    <div>Screen Height: <span data-target="debugger.height">Loading Height...</span></div>
+    <div class="small-12 show-for-small-only">Breakpoint: <span> Small (0px - 449px)</span></div>
+    <div class="small-12 show-for-medium-only">Breakpoint: <span>Medium (450px - 767px)</span></div>
+    <div class="small-12 show-for-large-only">Breakpoint: <span>Large (768px - 1023px)</span></div>
+    <div class="small-12 show-for-xlarge-only">Breakpoint: <span>XLarge (1024px - 1199px)</span></div>
+    <div class="small-12 show-for-xxlarge-only">Breakpoint: <span>XXLarge (1200px - 1439px)</span></div>
+    <div class="small-12 show-for-huge-only">Breakpoint: <span>Huge (1440px +)</span></div>
+    <div>Site Title: <span id="site-name"><%= RailsSiteTemplate::Version.title %></span></div>
+    <div>Site Version: <span id="site-version"><%= RailsSiteTemplate::Version.version %></span></div>
+    <div>Git Branch: <span id="site-branch"><%= RailsSiteTemplate::Version.branch %></span></div>
+    <div>Git Sha: <span id="site-sha"><%= RailsSiteTemplate::Version.sha %></span></div>
+  <% end %>
+  <%= debug(params) %>
+  <table>
+  <thead><tr><td>Variable</td><td>Value</td></tr></thead>
+    <tbody>
+      <% ENV.each do |k,v| %>
+        <% next if k.include?('_FIGARO') %>
+        <tr><td><%= k %></td><td><%= v %></td></tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end if Rails.env.development? || (!Rails.env.production? && ENV['debug_mode']) %>

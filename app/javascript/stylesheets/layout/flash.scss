@@ -1,0 +1,62 @@
+#flash-wrapper {
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.flash,
+.inline-flash {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: 100%;
+  padding: 16px 80px 16px 16px;
+  overflow: hidden;
+  color: $black;
+  word-break: break-all;
+  cursor: pointer;
+  background-color: $white;
+  transition: background-color .25s ease-out, box-shadow .25s ease-out;
+
+  &::after {
+    position: absolute;
+    top: 11px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    content: '×';
+  }
+
+  &.error,
+  &.alert,
+  &.warning,
+  &.warn {
+    color: darken($warn, 75%);
+    background-color: $warn;
+  }
+
+  &.notice {
+    color: darken($notice, 75%);
+    background-color: $notice;
+  }
+
+  &.success {
+    color: darken($success, 75%);
+    background-color: $success;
+  }
+}
+
+.inline-flash {
+  position: relative;
+  z-index: auto;
+  padding: 8px;
+  margin-bottom: 16px;
+  cursor: auto;
+  border-radius: 8px;
+
+  &::after {
+    display: none;
+  }
+}

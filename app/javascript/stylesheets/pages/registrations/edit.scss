@@ -1,0 +1,31 @@
+.account-nav {
+  .fixed-wrapper {
+    max-width: 407px;
+  }
+
+  ul {
+    border: 1px solid $primary;
+    border-radius: 4px;
+  }
+
+  li {
+    border-bottom: 1px solid $primary;
+
+    &:last-child {
+      border: 0;
+    }
+
+    a {
+      display: block;
+      padding: 8px 16px;
+      border-left: 4px solid;
+      border-color: transparent;
+      transition: border-color 250ms;
+
+      &.active {
+        border-color: $primary;
+        transition: border-color 250ms;
+      }
+    }
+  }
+}

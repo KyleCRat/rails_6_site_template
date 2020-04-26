@@ -1,0 +1,23 @@
+%nav.main-nav.fixed.top-0.bottom-0.left-0.z-50.bg-secondary{ data: { controller: 'nav' } }
+  .scroll-wrapper
+    .nav-header
+      %span.title Menu
+      %button.close{ data: { action: 'click->nav#toggle' } }
+        Close
+        %span &times;
+    %ul
+      - if content_for(:quick_nav)
+        = content_for(:quick_nav)
+        %li.spacer
+      %li= link_to('Home', root_path)
+      %li= link_to('Other', pages_path(:other)) if policy(:page).show?
+      %li= link_to('Users', users_path) if policy(:user).index?
+      %li= link_to('Interior Page', pages_path(:auth)) if policy(:page).show?
+      %li.spacer
+      %li= link_to('Edit Account', edit_user_registration_path) if user_signed_in?
+      - if user_signed_in?
+        %li= link_to('Logout', destroy_user_session_path, method: :delete)
+      - elsif controller_name != 'sessions'
+        %li= link_to('Login', new_user_session_path)
+      - else
+        %li= link_to('Sign Up', new_user_registration_path)

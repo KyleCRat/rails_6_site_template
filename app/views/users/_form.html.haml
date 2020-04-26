@@ -1,0 +1,9 @@
+= simple_form_for @user do |f|
+  = f.input :email, required: true, autofocus: true
+
+  = f.input :full_name
+  = f.input :username
+  = f.input :slug
+
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,32 @@
+.character-count {
+  position: relative;
+
+  .counter {
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    color: $font;
+    background: $light-gray;
+    border-right: 1px solid $medium-gray;
+    border-radius: 4px 0 0;
+  }
+
+  input {
+    padding-left: 56px;
+  }
+}
+
+.input {
+  &.error {
+    .counter {
+      color: darken($warn, 75%);
+      background: $warn;
+      border-color: darken($warn, 45%);
+    }
+  }
+}

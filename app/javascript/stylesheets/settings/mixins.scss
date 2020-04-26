@@ -1,0 +1,75 @@
+// !!!This should only import files that are included in the skeleton app!!!
+//   Do not include any site specific css or imports in this file!
+
+// define absolute position in a single line
+@mixin abs-pos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// Mixin to center objects, make sure parent is relative
+@mixin abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  margin-bottom: -50%;
+  transform: translate(-50%,-50%);
+}
+
+// Mixin to vertically center a image, make sure the parent is relative
+@mixin abs-vert-center {
+  position: absolute;
+  top: 50%;
+  margin-right: -50%;
+  transform: translate(0%,-50%);
+}
+
+// Mixin to center images, make sure parent is relative
+@mixin abs-center-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: fit-content;
+  min-height: 100%;
+  transform: translate(-50%,-50%);
+}
+
+// Mixin to vertically center a image, make sure the parent is relative
+@mixin abs-vert-center-img {
+  position: absolute;
+  top: 50%;
+  min-width: fit-content;
+  min-height: 100%;
+  transform: translate(0%,-50%);
+}
+
+// when you click on something it won't highlight
+@mixin noselect {
+  -webkit-touch-callout: none; // iOS Safari
+  -webkit-user-select: none;   // Chrome/Safari/Opera
+  -html-user-select: none;     // Konqueror
+  -moz-user-select: none;      // Firefox
+  -ms-user-select: none;       // Internet Explorer/Edge
+  user-select: none;
+}
+
+// Hide a element visually only
+//   Useage:
+//   <b class="visually-hidden">Open the navigation</b>
+%visuallyhidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+.visually-hidden {
+  @extend %visuallyhidden;
+}

@@ -1,0 +1,111 @@
+- title 'Account Preferences'
+
+.user-account.grid-x.grid-margin-x{ data: { controller: 'scroll-nav' } }
+  %nav.account-nav.cell.large-4.grid-x.grid-margin-x{ 'data-smooth-scroll' => '', 'data-offset' => '50', 'data-animation-easing' => 'swing' }
+    .fixed-wrapper.fixed.show-for-large.large-4.mt-4
+      %ul{ data: { target: 'scroll-nav.nav', action: 'raf:scrolling@window->scroll-nav#highlight' } }
+        %li
+          %a.active{ href: "#basic-account-info", data: { target: 'scroll-nav.link', id: 'basic-account-info' } } Basic Account Info
+        %li
+          %a{ href: "#unique-slug-url", data: { target: 'scroll-nav.link', id: 'unique-slug-url' } } Unique URL
+        %li
+          %a{ href: "#account-security", data: { target: 'scroll-nav.link', id: 'account-security' } } Account Security
+        %li
+          %a{ href: "#update-password", data: { target: 'scroll-nav.link', id: 'update-password' } } Update Password
+        %li
+          %a{ href: "#update-email", data: { target: 'scroll-nav.link', id: 'update-email' } } Update Email
+        %li
+          %a{ href: "#cancel-my-account", data: { target: 'scroll-nav.link', id: 'cancel-my-account' } } Cancel My Account
+
+  .user-account-actions.cell.large-8
+
+    %h2#basic-account-info Basic Account Information
+
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_info' }) do |f|
+      .form-inputs
+        = f.input :full_name
+        = f.input :username
+
+      .form-actions
+        = f.button :submit, "Update Account Info"
+
+    %hr
+    %h2#basic-account-info Profile Photo
+
+    .grid-x
+      .cell.medium-4
+        - if resource.avatar.attached?
+          = image_tag resource.avatar.variant(resize: '100x100!')
+
+      .cell.medium-8
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_info' }) do |f|
+          .form-inputs
+            = f.input :avatar
+
+          .form-actions
+            = f.button :submit, "Upload Avatar"
+
+    %hr
+    %h2#unique-slug-url Personal URL
+
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_slug' }) do |f|
+      .form-inputs
+        = f.input :slug, as: :character_count,
+          hint: '4 to 24 characters. This will be used to generate the unique URL to your profile.'
+
+      .form-inputs
+        - unless resource.slug.blank?
+          .inline-flash.notice
+            Your Unique URL is:
+            = link_to Pathname.new(request.base_url).join('users', resource.slug), user_path(resource)
+
+      .form-actions
+        = f.button :submit, "Update Personal URL"
+
+    %hr
+    %h2#account-security Account Security
+
+    %h3#update-password Update Password
+
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_password' }) do |f|
+      = f.input :password,
+        hint: "leave it blank if you don't want to change it",
+        required: false,
+        input_html: { autocomplete: 'new-password' }
+
+      = f.input :password_confirmation,
+        required: false,
+        input_html: { autocomplete: 'new-password' }
+
+      = f.input :current_password,
+        hint: 'we need your current password if you wish to change your password.',
+        required: true,
+        input_html: { autocomplete: 'current-password', id: 'current_password_edit_user_password' }
+
+      .form-actions
+        = f.button :submit, 'Update Password'
+
+    %hr
+    %h3#update-email Update Email
+
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_email' }) do |f|
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .inline-flash.warn
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+      = f.input :email,
+        hint: 'Email will not change until the new email verified.'
+
+
+      = f.input :current_password,
+        hint: 'Password required to change account email.',
+        required: true,
+        input_html: { autocomplete: 'current-password', id: 'current_password_edit_user_email' }
+
+      .form-actions
+        = f.button :submit, 'Update Email'
+
+    %hr
+    %h2#cancel-my-account Cancel my account
+    .inline-flash.warn Warning! These actions will result in permanent data loss, proceed with extreme caution.
+
+    = link_to 'Cancel my account', registration_path(resource_name), data: { confirm: 'Please confirm you want to cancel your account. This action can not be un-done.' }, method: :delete, class: 'button'

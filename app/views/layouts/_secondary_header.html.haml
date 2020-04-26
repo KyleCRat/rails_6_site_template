@@ -1,0 +1,4 @@
+.secondary-header{data: { controller: 'nav header', action: 'turbolinks:load@window->nav#close' } }
+  = render 'layouts/quick_nav'
+  .title.text-white.px-4
+    %span.block.text-xl.font-heading.flex-no-wrap= content_for :interior_title

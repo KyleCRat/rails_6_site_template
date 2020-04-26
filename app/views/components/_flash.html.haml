@@ -1,0 +1,2 @@
+- flash.each do |k, v|
+  = content_tag :div, v, class: "flash #{k}", data: { target: 'flash.notification', action: 'click->flash#close' }
