@@ -7,7 +7,15 @@ require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
-require("jquery");
+require('webpack-jquery-ui/sortable');
+require('webpack-jquery-ui/css');
+require('webpack-jquery-ui/datepicker');
+
+import $ from 'jquery';
+global.$ = jQuery;
+
+import "select2/dist/css/select2.css";
+import "select2";
 
 import "foundation";
 import "controllers";
@@ -15,8 +23,23 @@ import "scrollable";
 import "smooth_anchor";
 import "checkbox";
 
-document.addEventListener('turbolinks:load', function() {
-    SmoothAnchor.start();
+$(document).on('turbolinks:load', () => {
+  SmoothAnchor.start();
+
+  // Do not allow css transitions to function as page is loading.
+  setTimeout(() => {
+    $("body").removeClass("css-transition-preload");
+  }, 250);
+});
+
+$(document).on('click', '.prevent-default', (e) => {
+  // e.preventDefault();
+  e.stopPropagation();
+});
+
+$(document).on('click', '.stop-propagation', (e) => {
+  // e.preventDefault();
+  e.stopPropagation();
 });
 
 import "stylesheets/application.scss";
@@ -30,3 +53,5 @@ import "stylesheets/application.scss";
 
 require("trix");
 require("@rails/actiontext");
+
+import "controllers"

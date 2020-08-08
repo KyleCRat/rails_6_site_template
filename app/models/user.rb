@@ -32,8 +32,9 @@
 class User < ApplicationRecord
   # Change Tracking
   has_logidze
+
   # Authentication relations and methods
-  include Authenticateable
+  include Permissable
 
   before_validation :underscore_slug
 
@@ -48,7 +49,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates :full_name,
+  validates :first_name,
+            :last_name,
             :username,
             presence: true
 
@@ -59,8 +61,19 @@ class User < ApplicationRecord
             uniqueness: true,
             allow_blank: true
 
+  scope :admins, -> { joins(:permission_groups).where(permission_groups: { title: 'Administrator' }) }
+  scope :excluding_admins, -> { where.not(id: admins&.pluck(:id)) }
+
   ##############################################################################
   # Methods
+
+  def time_zone
+    'UTC'
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   def underscore_slug
     self.slug = self.slug.parameterize.underscore unless slug.blank?

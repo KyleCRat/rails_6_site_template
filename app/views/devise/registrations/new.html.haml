@@ -6,8 +6,9 @@
       = f.error_notification
 
       .form-inputs
-        = f.input :full_name,
+        = f.input :first_name,
                   autofocus: true
+        = f.input :last_name
         = f.input :username,
                   hint: 'This will be your display name on the site.'
         = f.input :email,

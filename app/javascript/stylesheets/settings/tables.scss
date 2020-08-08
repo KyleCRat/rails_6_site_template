@@ -1,0 +1,29 @@
+$table-background: $background;
+$table-background-alternating: darken($background, 10%);
+$table-font-color: $font;
+$table-border-color: darken($background, 10%);
+
+$table-head-background: $accent;
+$table-head-font-color: $white;
+
+table {
+  color: $table-font-color;
+}
+
+thead,
+th {
+  color: $table-head-font-color;
+  background-color: $table-head-background;
+  border-color: $table-border-color;
+}
+
+tbody {
+  background-color: $table-background;
+  border-color: $table-border-color;
+
+  tr {
+    &:nth-child(even) {
+      background-color: $table-background-alternating;
+    }
+  }
+}

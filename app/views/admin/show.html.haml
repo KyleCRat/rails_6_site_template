@@ -1,0 +1,16 @@
+- title 'Administration Panel'
+
+.admin-dashboard
+  .widget.row-2.column-2
+  .widget
+  .widget
+  .widget
+  .widget
+    %h3 Users
+    = User.count
+  .widget
+    %h3 Admins
+    = User.admins.count
+  .widget
+  .widget
+  .widget

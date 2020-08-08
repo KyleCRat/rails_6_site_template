@@ -15,7 +15,7 @@ class LogidzeInstall < ActiveRecord::Migration[5.0]
       SQL
     end
 
-    
+
 
     execute <<-SQL
       CREATE OR REPLACE FUNCTION logidze_version(v bigint, data jsonb, ts timestamp with time zone, blacklist text[] DEFAULT '{}') RETURNS jsonb AS $body$
@@ -234,6 +234,6 @@ class LogidzeInstall < ActiveRecord::Migration[5.0]
       DROP FUNCTION logidze_snapshot(jsonb, text, text[]) CASCADE;
       DROP FUNCTION logidze_logger() CASCADE;
     SQL
-    
+
   end
 end

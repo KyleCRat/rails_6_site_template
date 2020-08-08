@@ -1,0 +1,101 @@
+- title "#{@user.full_name}'s Permissions"
+
+%h1
+  = "#{@user.full_name}'s Permissions"
+
+= simple_form_for(@user, url: admin_permissions_user_path(@user)) do |f|
+  - @permission_group_types.each do |type|
+    = f.association type.name.downcase.pluralize,
+                    as: :select,
+                    wrapper_html: { data: { controller: 'select-two' } },
+                    input_html: { data: { target: 'select-two.select' } }
+
+  = f.button :submit, "Update"
+
+%hr
+
+.permission-toggle-legend
+  .input.legend
+    .label Denied
+    .permission-toggle
+      %input{ type: :radio, name: 'denied-legend', id: 'denied', checked: true, disabled: true }
+      %label{ for: 'denied' }
+
+      %input{ type: :radio, name: 'denied-legend', id: 'inherited', disabled: true }
+      %label{ for: 'inherited' }
+
+      %input{ type: :radio, name: 'denied-legend', id: 'permitted', disabled: true }
+      %label{ for: 'permitted' }
+
+      .background
+      %label.paddle
+        = inline_svg_tag('shared/check.svg', class: 'true')
+        = inline_svg_tag('shared/close.svg', class: 'false')
+
+  .input.legend
+    .label No Inherited Permission
+    .permission-toggle
+      %input{ type: :radio, name: 'inherited-legend', id: 'denied', disabled: true }
+      %label{ for: 'denied' }
+
+      %input{ type: :radio, name: 'inherited-legend', id: 'inherited', disabled: true }
+      %label{ for: 'inherited' }
+
+      %input{ type: :radio, name: 'inherited-legend', id: 'permitted', disabled: true }
+      %label{ for: 'permitted' }
+
+      .background
+      %label.paddle
+        = inline_svg_tag('shared/check.svg', class: 'true')
+        = inline_svg_tag('shared/close.svg', class: 'false')
+
+  .input.legend
+    .label Inherited Permission
+    .permission-toggle.group-permitted
+      %input{ type: :radio, name: 'inherited-legend', id: 'denied', disabled: true }
+      %label{ for: 'denied' }
+
+      %input{ type: :radio, name: 'inherited-legend', id: 'inherited', checked: true, disabled: true }
+      %label{ for: 'inherited' }
+
+      %input{ type: :radio, name: 'inherited-legend', id: 'permitted', disabled: true }
+      %label{ for: 'permitted' }
+
+      .background
+      %label.paddle
+        = inline_svg_tag('shared/check.svg', class: 'true')
+        = inline_svg_tag('shared/close.svg', class: 'false')
+
+  .input.legend
+    .label Permitted
+    .permission-toggle
+      %input{ type: :radio, name: 'permitted-legend', id: 'denied', disabled: true }
+      %label{ for: 'denied' }
+
+      %input{ type: :radio, name: 'permitted-legend', id: 'inherited', disabled: true }
+      %label{ for: 'inherited' }
+
+      %input{ type: :radio, name: 'permitted-legend', id: 'permitted', checked: true, disabled: true }
+      %label{ for: 'permitted' }
+
+      .background
+      %label.paddle
+        = inline_svg_tag('shared/check.svg', class: 'true')
+        = inline_svg_tag('shared/close.svg', class: 'false')
+
+.table-container
+  %table.user-permissions
+    %thead
+      %tr
+        %th Permissions
+        - @permission_headings.each do |heading|
+          %th= heading
+    %tbody
+      - @permissions_by_klass.each do |klass, actions|
+        %tr
+          %th= klass
+          - @permission_headings.each do |heading|
+            %td
+              - actions.each do |action|
+                - if action.action == heading
+                  = render_permission_toggle(@user, action)

@@ -109,9 +109,9 @@ ActiveRecord::Schema.define(version: 2019_12_06_214210) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "username"
-    t.string "location"
     t.string "slug"
     t.jsonb "log_data"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

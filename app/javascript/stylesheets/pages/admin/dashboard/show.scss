@@ -1,0 +1,47 @@
+.admin-dashboard {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 150px;
+  grid-auto-flow: row dense;
+
+  @include breakpoint(medium up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(large up) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoint(xlarge up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(xxlarge up) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoint(huge up) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .widget {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $white;
+    border-radius: 8px;
+
+    &.column-2 {
+      @include breakpoint(medium up) {
+        grid-column: span 2;
+      }
+    }
+
+    &.row-2 {
+      grid-row: span 2;
+    }
+  }
+}

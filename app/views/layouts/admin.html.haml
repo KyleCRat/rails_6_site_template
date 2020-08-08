@@ -1,0 +1,14 @@
+!!!
+%html
+  = render 'layouts/head'
+  %body.css-transition-preload
+    = render 'layouts/nav'
+    .body-wrapper
+      = render 'layouts/header'
+      = render 'layouts/secondary_header'
+      = render 'components/flash_wrapper'
+      #content.admin-content.relative.grid-container.fluid
+        = render 'admin/nav'
+        #admin-content
+          = yield
+      = render 'layouts/footer'

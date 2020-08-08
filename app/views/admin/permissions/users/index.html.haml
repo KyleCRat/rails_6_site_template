@@ -1,0 +1,16 @@
+- title 'User Permissions'
+
+%table
+  %thead
+    %th Name
+    - @permission_group_types.each do |type|
+      %th= type.pluralize.titleize
+    %th Permission Overrides
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to "#{user.full_name}#{' (me)' if user == current_user}", edit_admin_permissions_user_path(user)
+        - @permission_group_types.each do |name|
+          %td= user.send(name.downcase.pluralize).size
+        %td= user.permissions.size

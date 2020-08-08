@@ -2,10 +2,20 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+// Overwite default tailwind border color
+*,
+*::before,
+*::after {
+  border-color: inherit;
+}
+
 @import 'foundation/foundation_and_overrides';
 
 // Import Settings
 @import './settings/all';
+
+// Import Vendor Overrides
+@import './vendor/all';
 
 // Import all Components
 @import './components/all';

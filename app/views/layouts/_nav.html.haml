@@ -13,6 +13,9 @@
       %li= link_to('Other', pages_path(:other)) if policy(:page).show?
       %li= link_to('Users', users_path) if policy(:user).index?
       %li= link_to('Interior Page', pages_path(:auth)) if policy(:page).show?
+      - if policy(:admin).show?
+        %li.spacer
+        %li= link_to('Admin Dashboard', admin_dashboard_path)
       %li.spacer
       %li= link_to('Edit Account', edit_user_registration_path) if user_signed_in?
       - if user_signed_in?

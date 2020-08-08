@@ -1,0 +1,10 @@
+= simple_form_for([:admin, :permissions, @permission_group]) do |f|
+  = f.input :title
+  = f.input :type, as: :select, collection: PermissionGroup.subclasses.map(&:name)
+
+  = f.association :permissive_actions,
+                  as: :select,
+                  wrapper_html: { data: { controller: 'select-two' } },
+                  input_html: { data: { target: 'select-two.select' } }
+
+  = f.button :submit, class: 'button'

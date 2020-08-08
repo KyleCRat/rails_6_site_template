@@ -14,6 +14,17 @@ Rails.application.routes.draw do
     post :reset_password, on: :member
   end
 
+  namespace :admin do
+    resource :dashboard, only: :show
+
+    namespace :permissions do
+      resources :users
+      resources :permission_groups do
+        get '/type/:type', on: :collection, action: :index
+      end
+    end
+  end
+
   # Custom Error Routes
   match '/404',
         to: 'errors#not_found',

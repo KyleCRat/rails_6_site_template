@@ -2,7 +2,7 @@
 #
 # Table name: permission_groups
 #
-#  id    :integer          not null, primary key
+#  id    :bigint           not null, primary key
 #  title :string
 #  type  :string
 #
@@ -22,6 +22,19 @@ class PermissionGroup < ApplicationRecord
            through: :user_permission_groups,
            dependent: :destroy
 
-  scope :role,      -> { where(type: 'Role') }
-  scope :privilege, -> { where(type: 'Privilege') }
+  validates :title,
+            uniqueness: { scope: :type }
+
+  scope :roles,         -> { where(type: 'Role') }
+  scope :privileges,    -> { where(type: 'Privilege') }
+  scope :subscriptions, -> { where(type: 'Subscription') }
+
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        PermissionGroup.model_name
+      end
+    end
+    super
+  end
 end

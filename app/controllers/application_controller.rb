@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :set_action_cable_identifier
   before_action :create_body_id
+  around_action :set_time_zone, if: :current_user
 
   ##################################################
   # Site Initalizing actions
@@ -38,5 +40,17 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:warning] = 'You are not authorized to perform this action.'
     redirect_to(request.referrer || root_path)
+  end
+
+  private
+
+  # Set current user as a encrypted cookie for reflex useage
+  def set_action_cable_identifier
+    cookies.encrypted[:user_id] = current_user&.id
+  end
+
+  # Set the timezone for the user based on the user's time_zone preference
+  def set_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
   end
 end

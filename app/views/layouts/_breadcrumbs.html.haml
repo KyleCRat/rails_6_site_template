@@ -1,0 +1,6 @@
+%ul.breadcrumbs
+  - if breadcrumbs_on_rails.any?
+    = render_breadcrumbs(tag: :li, separator: '<li>|</li>'.html_safe)
+    - if content_for :interior_title
+      %li= '|'
+  %li.block.font-heading.flex-no-wrap= content_for :interior_title

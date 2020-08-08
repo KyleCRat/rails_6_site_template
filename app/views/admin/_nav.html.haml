@@ -1,0 +1,8 @@
+%nav#admin-nav
+  %ul
+    %li.title Administration Panel
+    %li.spacer
+    %li= link_to('Dashboard', admin_dashboard_path)
+    %li.spacer
+    %li= link_to('User Permissions', admin_permissions_users_path)
+    %li= link_to('Group Permissions', admin_permissions_permission_groups_path)

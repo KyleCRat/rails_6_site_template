@@ -33,4 +33,8 @@ module ApplicationHelper
       Rails.configuration.default_meta_description
     end
   end
+
+  def body_controller_action_class_name
+    "#{controller_path.parameterize}_#{action_name}"
+  end
 end

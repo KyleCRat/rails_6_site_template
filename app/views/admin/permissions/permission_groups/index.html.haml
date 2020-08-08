@@ -1,0 +1,20 @@
+- title 'Permission Groups'
+
+- @permission_groups&.each do |title, permission_groups|
+  %table
+    %thead
+      %tr
+        %th= title.pluralize.titleize
+        %th
+        %th
+
+    %tbody
+      - permission_groups.each do |permission_group|
+        %tr
+          %td= permission_group.title
+          %td= link_to 'Edit', edit_admin_permissions_permission_group_path(permission_group)
+          %td= link_to 'Destroy', admin_permissions_permission_group_path(permission_group), method: :delete
+
+%br
+
+= link_to 'New Group', new_admin_permissions_permission_group_path, class: 'button'
