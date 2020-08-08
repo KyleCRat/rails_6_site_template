@@ -1,0 +1,189 @@
+$permission-toggle-width: 72px !default;
+$permission-toggle-height: 32px !default;
+$permission-paddle-size: 26px !default;
+
+$permission-toggle-permitted-bg-color: darken($success, 40%);
+$permission-toggle-inherited-bg-color: #cacaca;
+$permission-toggle-denied-bg-color: darken($warn, 40%);
+$permission-toggle-group-permitted-bg-color: darken($success, 20%);
+$permission-toggle-group-denied-bg-color: darken($warn, 20%);
+
+$permission-paddle-background-color: $white;
+$permission-paddle-border-color: $tertiary;
+$permission-paddle-border-size: 0;
+
+$permission-toggle-border-radius: $permission-toggle-height / 2;
+
+$permission-paddle-size-offset: ($permission-toggle-height - $permission-paddle-size) / 2;
+$permission-paddle-left-offset: 0 + $permission-paddle-size-offset;
+$permission-paddle-middle-offset: ($permission-toggle-width - $permission-paddle-size) / 2;
+$permission-paddle-right-offset: $permission-toggle-width - $permission-paddle-size - $permission-paddle-size-offset;
+
+$permission-symbol-left-offset: $permission-paddle-left-offset + 5px;
+$permission-symbol-middle-offset: $permission-paddle-middle-offset + 5px;
+$permission-symbol-right-offset: $permission-paddle-right-offset + 5px;
+
+.permission-toggle {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+
+  width: $permission-toggle-width;
+  height: $permission-toggle-height;
+  margin: 0 auto;
+
+  label:not(:last-child) {
+    width: $permission-toggle-width / 3;
+    height: $permission-toggle-height;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    > span {
+      @extend %visuallyhidden;
+    }
+  }
+
+  label.paddle {
+    position: absolute;
+    top: $permission-paddle-size-offset;
+    left: $permission-paddle-middle-offset;
+    width: $permission-paddle-size;
+    height: $permission-paddle-size;
+    background-color: $permission-paddle-background-color;
+    border: $permission-paddle-border-size solid $permission-paddle-border-color;
+    border-radius: 50%;
+    content: '';
+    transform: translate3d(0, 0, 0);
+    transition: left .25s ease-out;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity .45s;
+      fill: $permission-toggle-inherited-bg-color;
+    }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $permission-toggle-inherited-bg-color;
+    border-radius: $permission-toggle-border-radius;
+    transition: background-color .25s ease-out;
+  }
+
+  &.group-permitted {
+    svg {
+      &.true {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:not(.group-permitted) {
+    svg {
+      &.false {
+        opacity: 1;
+      }
+    }
+  }
+
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    opacity: 0;
+
+    &:nth-child(1):checked {
+      ~ label.paddle {
+        left: $permission-paddle-left-offset;
+
+        svg {
+          &.false {
+            opacity: 1;
+            fill: $permission-toggle-denied-bg-color;
+          }
+          &.true {
+            opacity: 0;
+          }
+        }
+      }
+
+      ~ .background {
+        background-color: $permission-toggle-denied-bg-color;
+      }
+    }
+
+    &:nth-child(3):checked {
+      ~ label.paddle {
+        left: $permission-paddle-middle-offset;
+      }
+
+      ~ .background {
+        background-color: $permission-toggle-inherited-bg-color;
+      }
+    }
+
+    &:nth-child(5):checked {
+      ~ label.paddle {
+        left: $permission-paddle-right-offset;
+
+        svg   {
+          &.true {
+            opacity: 1;
+            fill: $permission-toggle-permitted-bg-color;
+          }
+
+          &.false {
+            opacity: 0;
+          }
+        }
+      }
+
+      ~ .background {
+        background-color: $permission-toggle-permitted-bg-color;
+      }
+    }
+
+    &:disabled ~ label {
+      cursor: not-allowed;
+    }
+
+    &:focus ~ & {
+      @include disable-mouse-outline;
+    }
+  }
+}
+
+.permission-toggle-legend {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .legend {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+
+    .label {
+      margin-right: 8px;
+      text-align: right;
+    }
+
+    .permission-toggle {
+      margin: 0;
+    }
+  }
+}

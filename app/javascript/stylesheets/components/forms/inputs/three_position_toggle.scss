@@ -1,0 +1,154 @@
+// HTML EXAMPLE
+// .input.toggle
+//   .three-position-toggle
+//     %input{ type: :radio, name: 'unique-name', id: 'denied' }
+//     %label{ for: 'denied' }
+//
+//     %input{ type: :radio, name: 'unique-name', id: 'inherited' }
+//     %label{ for: 'inherited' }
+//
+//     %input{ type: :radio, name: 'unique-name', id: 'permitted' }
+//     %label{ for: 'permitted' }
+
+$three-position-toggle-width: 72px !default;
+$three-position-toggle-height: 32px !default;
+$three-position-paddle-size: 26px !default;
+
+$three-position-toggle-permitted-bg-color: darken($success, 40%);
+$three-position-toggle-inherited-bg-color: #cacaca;
+$three-position-toggle-denied-bg-color: darken($warn, 40%);
+
+$three-position-paddle-background-color: $white;
+$three-position-paddle-border-color: $tertiary;
+$three-position-paddle-border-size: 1px;
+
+$three-position-toggle-border-radius: $three-position-toggle-height / 2;
+
+$three-position-paddle-size-offset: ($three-position-toggle-height - $three-position-paddle-size) / 2;
+$three-position-paddle-left-offset: 0 + $three-position-paddle-size-offset;
+$three-position-paddle-middle-offset: ($three-position-toggle-width - $three-position-paddle-size) / 2;
+$three-position-paddle-right-offset: $three-position-toggle-width - $three-position-paddle-size - $three-position-paddle-size-offset;
+
+$three-position-symbol-left-offset: $three-position-paddle-left-offset + 6px;
+$three-position-symbol-middle-offset: $three-position-paddle-middle-offset + 6px;
+$three-position-symbol-right-offset: $three-position-paddle-right-offset + 6px;
+
+
+.three-position-toggle {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  width: 72px;
+  height: 32px;
+
+  label:not(:last-child) {
+    width: 24px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    > span {
+      @extend %visuallyhidden;
+    }
+  }
+
+  label.paddle {
+    position: absolute;
+    top: $three-position-paddle-size-offset;
+    left: $three-position-paddle-middle-offset;
+    width: $three-position-paddle-size;
+    height: $three-position-paddle-size;
+    cursor: pointer;
+    background-color: $three-position-paddle-background-color;
+    border-radius: 50%;
+    content: '';
+    transform: translate3d(0, 0, 0);
+    transition: left .25s ease-out;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity .25s;
+      fill: $three-position-toggle-inherited-bg-color;
+    }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $three-position-toggle-inherited-bg-color;
+    border-radius: $three-position-toggle-border-radius;
+    content: '';
+    transition: background-color .25s ease-out;
+  }
+
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    opacity: 0;
+
+    &:nth-child(1):checked {
+      ~ label.paddle {
+        left: $three-position-paddle-left-offset;
+
+        svg {
+          &.false {
+            opacity: 1;
+            fill: $three-position-toggle-denied-bg-color;
+          }
+        }
+      }
+
+      ~ .background {
+        background-color: $three-position-toggle-denied-bg-color;
+      }
+    }
+
+    &:nth-child(3):checked {
+      ~ label.paddle {
+        left: $three-position-paddle-middle-offset;
+      }
+
+      ~ .background {
+        background-color: $three-position-toggle-inherited-bg-color;
+      }
+    }
+
+    &:nth-child(5):checked {
+      ~ label.paddle {
+        left: $three-position-paddle-right-offset;
+
+        svg   {
+          &.true {
+            opacity: 1;
+            fill: $three-position-toggle-permitted-bg-color;
+          }
+        }
+      }
+
+      ~ .background {
+        background-color: $three-position-toggle-permitted-bg-color;
+      }
+    }
+
+    &:disabled ~ & {
+      cursor: not-allowed;
+      opacity: .6;
+    }
+
+    &:focus ~ & {
+      @include disable-mouse-outline;
+    }
+  }
+}
