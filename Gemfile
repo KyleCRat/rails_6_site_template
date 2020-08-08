@@ -9,22 +9,22 @@ ruby '2.7.1'
 ##########################################
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.1'
+gem 'rails', '~> 6'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4', require: false
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5'
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 4'
 
 # Simple, efficient background processing for Ruby.
 #   Install info: https://github.com/mperham/sidekiq/wiki/Active+Job
@@ -54,7 +54,7 @@ gem 'sassc-rails'
 gem 'haml-rails'
 
 # A library for creating declarative interfaces in controllers
-gem 'decent_exposure'
+# gem 'decent_exposure'
 
 # Better Enumerations
 gem 'enumerations'
@@ -71,12 +71,15 @@ gem 'inline_svg'
 # real time reactive rails application extension
 gem 'stimulus_reflex'
 
+# breadcrumbs
+gem 'breadcrumbs_on_rails'
+
 ##########################################
 # Authentication
 ##########################################
 
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1'
 
 # devise authentication system
 gem 'devise'
@@ -92,7 +95,7 @@ gem 'pundit'
 ##########################################
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
@@ -113,7 +116,7 @@ gem 'simple_form'
 # gem 'cocoon' # TODO: webpacker?
 
 # Pagination at the model level
-#gem 'kaminari'
+gem 'kaminari'
 
 # Remote form submission
 # gem 'remotipart' # TODO: webpacker?
@@ -139,9 +142,6 @@ gem 'puma'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # Preview email in the default browser instead of sending it via
-  gem 'letter_opener'
 
   # A library for setting up Ruby objects as test data
   gem 'factory_bot_rails'
@@ -177,6 +177,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 
+  # Preview email in the default browser instead of sending it via
+  gem 'letter_opener_web'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -190,6 +193,9 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+
+  # Test pundit from the user context
+  gem 'pundit-matchers', '~> 1.6.0'
 
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
