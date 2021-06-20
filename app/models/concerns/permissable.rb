@@ -36,11 +36,9 @@ module Permissable
              dependent: :destroy
 
     has_many :allowed_overrides, -> { allowed },
-             source: :permission_overrides,
              class_name: 'PermissionOverride'
 
     has_many :denied_overrides, -> { denied },
-             source: :permission_overrides,
              class_name: 'PermissionOverride'
 
     has_many :allowed_actions,
