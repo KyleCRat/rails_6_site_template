@@ -2,7 +2,7 @@
 #
 # Table name: permission_groups
 #
-#  id    :integer          not null, primary key
+#  id    :bigint           not null, primary key
 #  title :string
 #  type  :string
 #

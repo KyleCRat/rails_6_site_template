@@ -2,9 +2,9 @@
 #
 # Table name: user_permission_groups
 #
-#  id                  :integer          not null, primary key
+#  id                  :bigint           not null, primary key
 #  user_id             :uuid             not null
-#  permission_group_id :integer          not null
+#  permission_group_id :bigint           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

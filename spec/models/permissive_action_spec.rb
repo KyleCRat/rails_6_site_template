@@ -2,7 +2,7 @@
 #
 # Table name: permissive_actions
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  klass      :string
 #  action     :string
 #  created_at :datetime         not null
